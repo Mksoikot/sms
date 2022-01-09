@@ -2,6 +2,7 @@
 <?php
 
 require_once "./dbcon.php";
+session_start();
 
   if (isset($_POST['registation'])) {
     $name = $_POST['name'];
@@ -36,7 +37,29 @@ require_once "./dbcon.php";
       if(mysqli_num_rows($email_check)==0){
         $username_check = mysqli_query($link,"SELECT * FROM `users` WHERE username = '$username';");
         if (mysqli_num_rows($username_check)==0) {
-          $username_error = "This Username Already Exists";
+          if(strlen($username) > 7){
+            if (strlen($password) > 7) {
+              if ($password == $cpass) {
+                $password = md5($password);
+                $query = "INSERT INTO `users`(`name`, `email`, `username`, `password`, `photo`, `status`) VALUES ('$name','email','$username','$password','$photo_name','inactive')";
+                $result = mysqli_query($link, $query);
+                if ($result) {
+                  $_SESSION['data_insert_success'] = "data_insert_successfully";
+                  move_uploaded_file($_FILES['photo']['tmp_name'], "../images/".$photo_name);
+                  header('location: registation.php;');
+                }else{
+                   $_SESSION['data_insert_error'] = "data_insert_Error";
+                }
+
+              }else{
+                $cpassword_not_match = "confirm password not match";
+              }
+            }else{
+              $password_l = "Password More Then 8 Characters";
+            }
+          }else{
+            $username_l = "Username More Then 8 Characters";
+          }
         }
       }else{
         $email_error = "This Email Address Already Exists";
@@ -64,6 +87,13 @@ require_once "./dbcon.php";
   <body>
     <div class="container">
       <h1 class="">User Registation Form</h1>
+      <?php if (isset($_SESSION['data_insert_success'])) {
+        echo '<div class="alert alert-success">'.$_SESSION['data_insert_success'].'</div>';
+      } ?>
+      
+       <?php if (isset($_SESSION['data_insert_error'])) {
+        echo '<div class="alert alert-danger">'.$_SESSION['data_insert_error'].'</div>';
+      } ?>
       <hr>
       <div class="row">
         <div class="col-sm-12">
@@ -116,6 +146,18 @@ require_once "./dbcon.php";
             }
             ?>
             </label>
+            <label class="error">
+            <?php if (isset($username_error)) { 
+              echo $username_error;
+            }
+            ?>
+            </label>
+              <label class="error">
+            <?php if (isset($username_l)) { 
+              echo $username_l;
+            }
+            ?>
+            </label>
           </div>
       </div>
       <br>
@@ -131,6 +173,12 @@ require_once "./dbcon.php";
             }
             ?>
             </label>
+             <label class="error">
+            <?php if (isset($password_l)) { 
+              echo $password_l;
+            }
+            ?>
+            </label>
           </div>
       </div>
       <br>
@@ -143,6 +191,12 @@ require_once "./dbcon.php";
         <label class="error">
             <?php if (isset($input_eror['c_pass'])) { 
               echo $input_eror['c_pass'];
+            }
+            ?>
+            </label>
+             <label class="error">
+            <?php if (isset($cpassword_not_match)) { 
+              echo $cpassword_not_match;
             }
             ?>
             </label>
