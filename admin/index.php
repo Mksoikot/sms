@@ -34,10 +34,7 @@ if(!isset($_SESSION['user_login'])){
         <a class="nav-link" href="#"> <span class="sr-only">(current)</span></a>
       </li>
     </ul>
- <!--    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form> -->
+
       <a class="nav-link" href="#" style="color: #181818;"><i class="fa fa-user"></i> Welcome</a>
      <a class="nav-link" href="#" style="color: #181818;"><i class="fa fa-user-plus"></i> Add User</a>
       <a class="nav-link" href="#" style="color: #181818;"><i class="fa fa-user"></i> Profile</a>
@@ -56,7 +53,25 @@ if(!isset($_SESSION['user_login'])){
 		</div>
 		<div class="col-sm-9">
 			<div class="content">
-				<h1 class="text-primary">Dashboard <span style="font-size: 20px;color: gray;">Statistics Overview</span></h1>
+				<h1 class="text-primary"><i class="fa fa-dashboard"> </i> Dashboard <span style="font-size: 20px;color: gray;">Statistics Overview</span></h1>
+  <ol class="breadcrumb">
+         <li class="breadcrumb-item"><i class="fa fa-dashboard"> </i> Dashboard</li>
+  </ol>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-4">
+                <i class="fa fa users fa-5x"></i>
+              </div>
+            </div>
+          </div>
+         </div>
+          </div>
+        </div>
+        <div class="col-sm-4"></div>
+      </div>
 			</div>
 		</div>
 	</div>
