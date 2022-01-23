@@ -1,6 +1,21 @@
-.error{
-	color: red;
-	font-style: italic;
-	font-weight: 700;
-	font-size: 15px;
+.error {
+    color: red;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.content {
+    min-height: 550px;
+}
+
+.footer-area {
+    background: #0D6EFD;
+    text-align: center;
+    padding: 15px 0;
+    color: #fff;
+}
+
+.footer-area p {
+    margin: 0;
 }
